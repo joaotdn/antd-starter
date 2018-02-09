@@ -20,9 +20,9 @@ class App extends Component {
         <Content style={{ padding: '40px 0' }}>
           <Row>
               <Col sm={24} lg={{ span: 22, offset: 1 }}>
-                  <ConnectedRouter history={history}>
+                <ConnectedRouter history={history}>
                     { routes }
-                  </ConnectedRouter>
+                </ConnectedRouter>
               </Col>
           </Row>
         </Content>

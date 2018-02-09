@@ -6,13 +6,11 @@ import Users from '../components/users/Index'
 import SingleUser from '../components/users/SingleUser'
 
 const routes = (
-    <div>
-        <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/users" component={Users} />
-            <Route path="/users/:id" component={SingleUser} />
-        </Switch>
-    </div>
+    <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/users" component={Users} />
+        <Route path="/users/:id" component={SingleUser} />
+    </Switch>
 )
 
 export default routes
