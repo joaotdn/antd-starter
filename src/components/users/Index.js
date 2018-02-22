@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getAllUsers } from '../../actions/users'
 
-import ListUsers from '../../components/users/ListUsers'
-
 class Index extends Component {
     componentDidMount() {
         this.props.dispatch(getAllUsers())
@@ -13,7 +11,7 @@ class Index extends Component {
         const { users } = this.props
         return (
             <div>
-                {users ? (<ListUsers users={users} history={this.props.history} />) : null}
+                {users ? (<ul>{users.map(u => (<li key={u.id}>{u.name}</li>))}</ul>) : null}
             </div>
         )
     }

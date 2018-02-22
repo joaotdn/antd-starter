@@ -7,12 +7,7 @@ import { createLogger } from 'redux-logger'
 import { createBrowserHistory } from 'history'
 import { routerMiddleware, connectRouter } from 'connected-react-router'
 import rootReducer from './reducers'
-
-import { LocaleProvider } from 'antd'
-import en_US from 'antd/lib/locale-provider/en_US'
 import App from './containers/App'
-
-import './theme.less'
 
 const history = createBrowserHistory()
 
@@ -35,7 +30,7 @@ const store = createStore(
 const render = () => {
     ReactDOM.render(
         <Provider store={store}>
-          <LocaleProvider locale={en_US}><App history={history} /></LocaleProvider>
+          <App history={history} />
         </Provider>,
         document.getElementById('root')
     )
