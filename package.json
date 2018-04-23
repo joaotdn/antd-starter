@@ -1,31 +1,50 @@
 {
-  "name": "heimdall",
+  "name": "iris",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "babel-polyfill": "6.23.0",
+    "hoist-non-react-statics": "2.1.1",
     "antd": "^3.2.0",
     "connected-react-router": "^4.3.0",
     "cross-fetch": "^1.1.1",
     "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "lodash": "4.17.4",
+    "invariant": "2.2.2",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "react-router-redux": "5.0.0-alpha.6",
+    "redux-immutable": "4.0.0",
     "react-scripts": "1.1.0",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "redux-saga": "^0.15.3",
+    "reselect": "3.0.1",
+    "react-intl": "2.3.0",
+    "immutable": "3.8.1",
+    "intl": "1.2.5",
+    "react-loadable": "4.0.3"
   },
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "extract-intl": "babel-node --presets env,stage-0 -- ./internals/scripts/extract-intl.js",
+    "generate": "plop --plopfile internals/generators/index.js"
   },
   "devDependencies": {
     "babel-plugin-import": "^1.6.3",
+    "coveralls": "2.13.1",
+    "enzyme": "^3.3.0",
     "less-vars-to-js": "^1.2.1",
+    "node-plop": "0.7.0",
+    "offline-plugin": "4.8.1",
+    "plop": "1.8.0",
     "react-app-rewire-less": "^2.1.0",
     "react-app-rewired": "^1.4.1"
   }

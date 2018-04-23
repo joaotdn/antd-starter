@@ -1,44 +1,74 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { applyMiddleware, compose, createStore } from 'redux'
-import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
-import { createLogger } from 'redux-logger'
-import { createBrowserHistory } from 'history'
-import { routerMiddleware, connectRouter } from 'connected-react-router'
-import rootReducer from './reducers'
+/**
+ * index.js
+ *
+ * This is the entry file for the application, only setup and boilerplate
+ * code.
+ */
 
-import { LocaleProvider } from 'antd'
-import en_US from 'antd/lib/locale-provider/en_US'
-import App from './containers/App'
+// Needed for redux-saga es6 generator support
+import 'babel-polyfill';
 
-import './theme.less'
+// Import all the third party stuff
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
 
-const history = createBrowserHistory()
+// Import root app
+import App from './containers/App';
 
-const middleware = [ thunk ]
-if (process.env.NODE_ENV !== 'production') {
-    middleware.push(createLogger());
-}
+// Import Language Provider
+import LanguageProvider from './containers/LanguageProvider';
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const store = createStore(
-  connectRouter(history)(rootReducer),
-  composeEnhancer(
-    applyMiddleware(
-      routerMiddleware(history),
-      ...middleware
-    ),
-  ),
-)
+// Configure redux store
+import configureStore from './configureStore';
 
-const render = () => {
+// Import i18n messages
+import { translationMessages } from './i18n';
+
+// Import CSS reset and Global Styles
+import './theme.less';
+
+// Create redux store with history
+const initialState = {};
+const history = createHistory();
+const store = configureStore(initialState, history);
+const MOUNT_NODE = document.getElementById('root');
+
+const render = (messages) => {
     ReactDOM.render(
         <Provider store={store}>
-          <LocaleProvider locale={en_US}><App history={history} /></LocaleProvider>
+            <LanguageProvider messages={messages}>
+                <ConnectedRouter history={history}>
+                    <App />
+                </ConnectedRouter>
+            </LanguageProvider>
         </Provider>,
-        document.getElementById('root')
-    )
+        MOUNT_NODE
+    );
+};
+
+// Chunked polyfill for browsers without Intl support
+if (!window.Intl) {
+    (new Promise((resolve) => {
+        resolve(import('intl'));
+    }))
+        .then(() => Promise.all([
+            import('intl/locale-data/jsonp/en.js'),
+            import('intl/locale-data/jsonp/de.js'),
+        ]))
+        .then(() => render(translationMessages))
+        .catch((err) => {
+            throw err;
+        });
+} else {
+    render(translationMessages);
 }
-  
-render()
+
+// Install ServiceWorker and AppCache in the end since
+// it's not most important operation and if main code fails,
+// we do not want it installed
+if (process.env.NODE_ENV === 'production') {
+    require('offline-plugin/runtime').install(); // eslint-disable-line global-require
+}
