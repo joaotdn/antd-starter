@@ -20,13 +20,15 @@ $ tree --charset unicode
 |-- index.html
 |-- package.json
 |-- src
-|   |-- actions
 |   |-- components
-|   |-- constants
 |   |-- containers
-|   |-- reducers
-|   |-- routes
+|   |-- tests
+|   |-- translations
+|   |-- utils
+|   |-- configureStore.js
+|   |-- i18n.js
 |   |-- index.js
+|   |-- reducers.js
 |   |-- theme.less
 `-- config-overrides.js
 ````
