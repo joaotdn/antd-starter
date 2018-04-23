@@ -19,7 +19,6 @@ $ tree --charset unicode
 |-- README.md
 |-- index.html
 |-- package.json
-|-- docs
 |-- src
 |   |-- components
 |   |-- containers

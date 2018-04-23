@@ -5,7 +5,7 @@ import { Layout, Row, Col } from 'antd'
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-import NavBar from '../../components/ui/NavBar'
+import NavBar from '../../components/ui/NavBar';
 
 class App extends Component {
   render() {
